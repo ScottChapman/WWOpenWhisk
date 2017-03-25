@@ -16,7 +16,7 @@ import * as socket from 'socket.io';
 import * as fs from 'fs';
 import * as _ from 'lodash';
 var io;
-import * as openwhisk from 'openwhisk';
+var openwhisk = require('openwhisk');
 const options = {
   apihost: 'https://openwhisk.ng.bluemix.net',
   namespace: 'scottchapman@us.ibm.com_dev',
@@ -52,7 +52,7 @@ export const echo = (appId, token) => (req, res) => {
     blocking: true,
     result: true,
     params: req.body}).then(result => console.log(result))
-    
+
   // log('SpaceID: %s', req.body.spaceId);
   // log('SpaceName: %s', req.body.spaceName);
   // log('userName: %s', req.body.userName);
