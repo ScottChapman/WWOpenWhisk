@@ -34,6 +34,9 @@ export const echo = (appId, token) => (req, res) => {
     console.log(JSON.stringify(req.body,null, "  "));
   }
 
+  if (req.body.hasOwnProperty('annotationPayload'))
+    req.body.annotationPayload = JSON.parse(req.body.annotationPayload);
+    
 	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
 
   // log('SpaceID: %s', req.body.spaceId);
