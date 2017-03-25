@@ -3,8 +3,8 @@ applications:
   memory: 1024M
   instances: 1
   domain: mybluemix.net
-  name: WWConnect2017Healthcare
-  host: WWConnect2017Healthcare
+  name: WWOpenWhisk
+  host: WWOpenWhisk
   disk_quota: 2G
   command: node lib/app.js
   buildpack: sdk-for-nodejs
