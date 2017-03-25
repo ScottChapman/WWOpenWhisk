@@ -34,8 +34,8 @@ export const echo = (appId, token) => (req, res) => {
     // return;
 
 	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
+};
 
-  })
   // log('SpaceID: %s', req.body.spaceId);
   // log('SpaceName: %s', req.body.spaceName);
   // log('userName: %s', req.body.userName);
