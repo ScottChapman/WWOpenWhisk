@@ -1,0 +1,52 @@
+{
+    "spaceName": "ScottSpace",
+    "spaceId": "58822220e4b0192475567c93",
+    "annotationPayload": {
+        "lens": "Request",
+        "category": "LabResults",
+        "start": 0,
+        "end": 33,
+        "phrase": "How does his blood pressure look?",
+        "confidence": 0.99,
+        "actions": [],
+        "payload": "{\"log_messages\":[],\"text\":[],\"nodes_visited\":[\"node_7_1487278524767\"]}",
+        "context": "{\"conversation_id\":\"70564646-45a1-4193-9a6f-fb107117d9f4\",\"system\":{\"dialog_stack\":[{\"dialog_node\":\"root\"}],\"dialog_turn_counter\":1.0,\"dialog_request_counter\":1.0}}",
+        "extractedInfo": {
+            "entities": [
+                {
+                    "text": "blood pressure",
+                    "type": "FieldTerminology",
+                    "source": "AlchemyLanguage",
+                    "count": 1,
+                    "relevance": 0.33
+                },
+                {
+                    "text": "blood pressure",
+                    "type": "vitals",
+                    "source": "Conversation",
+                    "location": [
+                        13,
+                        27
+                    ]
+                }
+            ],
+            "keywords": [
+                {
+                    "relevance": 0.971573,
+                    "text": "blood pressure look"
+                }
+            ],
+            "dates": []
+        },
+        "applicationId": "7f04e6b3-0d97-43a5-99a3-0ea824732f4b",
+        "lensId": "5fa46ff0-f2c5-11e6-a6a9-85ddc36eba1c",
+        "focusVersion": 4
+    },
+    "messageId": "58a8c53be4b0cdea294dc8e7",
+    "annotationType": "message-focus",
+    "annotationId": "58a8c53be4b052591e453439",
+    "time": "1/18/2017, 17:5:47.987",
+    "type": "message-annotation-added",
+    "userName": null,
+    "userId": "toscana-service-watson-conversation-client-id"
+}

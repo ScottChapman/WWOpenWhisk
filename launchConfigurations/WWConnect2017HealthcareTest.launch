@@ -1,0 +1,16 @@
+{
+  "ServiceId": "com.ibm.cloudoe.orion.client.deploy",
+  "Params": {
+    "Target": {
+      "Url": "https://api.ng.bluemix.net",
+      "Org": "scottchapman@us.ibm.com",
+      "Space": "dev"
+    },
+    "Name": "WWConnect2017Healthcare2",
+    "Instrumentation": {
+      "host": "WWConnect2017Healthcare2"
+    }
+  },
+  "Path": "manifest.yml",
+  "Type": "Cloud Foundry"
+}

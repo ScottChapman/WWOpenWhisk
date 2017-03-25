@@ -1,0 +1,15 @@
+applications:
+- path: .
+  memory: 1024M
+  instances: 1
+  domain: mybluemix.net
+  name: WWConnect2017Healthcare
+  host: WWConnect2017Healthcare
+  disk_quota: 2G
+  command: node lib/app.js
+  buildpack: sdk-for-nodejs
+  env:
+    ECHO_APP_ID: 0b046361-2a33-4daa-b9a2-39050f4f7d9b
+    ECHO_APP_SECRET: podbprm16z57oeufs2i6thqi515scg45
+    ECHO_WEBHOOK_SECRET: 4oork2r98xsf9a3hw7m4h56u6fw4fxw3
+    DEBUG: watsonwork-*
