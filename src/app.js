@@ -16,6 +16,14 @@ import * as socket from 'socket.io';
 import * as fs from 'fs';
 import * as _ from 'lodash';
 var io;
+import * as openwhisk from 'openwhisk';
+const options = {
+  apihost: 'https://openwhisk.ng.bluemix.net',
+  namespace: 'scottchapman@us.ibm.com_dev',
+  api_key: '227778f3-72d3-4cce-884e-60d695ee8dec:IP4nHlkSExBB7uPHTgfs1PJ7fMAtqjn5REFKDkgRKJkPHWJuizWcKm4z20m9Xdkb'
+};
+var ow = openwhisk(options);
+
 
 // Debug log
 const log = debug('watsonwork-echo-app');
@@ -36,9 +44,15 @@ export const echo = (appId, token) => (req, res) => {
 
   if (req.body.hasOwnProperty('annotationPayload'))
     req.body.annotationPayload = JSON.parse(req.body.annotationPayload);
-    
+
 	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
 
+  ow.actions.invoke({
+    name: 'WatsonWorkEvent',
+    blocking: true,
+    result: true,
+    params: req.body}).then(result => console.log(result))
+    
   // log('SpaceID: %s', req.body.spaceId);
   // log('SpaceName: %s', req.body.spaceName);
   // log('userName: %s', req.body.userName);

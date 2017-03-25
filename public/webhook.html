@@ -29,7 +29,7 @@
       socket.on('webhook-event', function (data) {
         var body = data.body;
         var text = '*** Type: ' + body.type + ' *** ' +
-        '<br/>' + ' Payload: <pre>' + JSON.stringify(body,null,'    ') + '</pre>' + "<br/>";
+        '<br/>' + ' Payload: <pre>' + JSON.stringify(body,null,'  ') + '</pre>' + "<br/>";
         // convert the json string into a valid javascript object
         //var _data = JSON.parse(data);
         $('time').html('Last Update:' + new Date());
