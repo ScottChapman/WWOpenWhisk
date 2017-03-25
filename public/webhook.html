@@ -28,23 +28,8 @@
       // on every notification (new received outboud request event) we update the log
       socket.on('webhook-event', function (data) {
         var body = data.body;
-        if (body.annotationPayload && typeof body.annotationPayload === "string") {
-          body.annotationPayload = JSON.parse(body.annotationPayload)
-        }
-        if (body.annotationPayload.payload && typeof body.annotationPayload.payload === "string") {
-          body.annotationPayload.payload = JSON.parse(body.annotationPayload.payload)
-        }
-        if (body.annotationPayload.context && typeof body.annotationPayload.context === "string") {
-          body.annotationPayload.context = JSON.parse(body.annotationPayload.context)
-        }
-        var d = new Date(body.time);
-        var currentDate = new Date();
-        var latency = (currentDate - body.time) / 1000;
-        body.time = formatDate(d);
         var text = '*** Type: ' + body.type + ' *** ' +
-          '<br/>Time: ' + formatDate(currentDate) +
-          '<br/>Latency: ' + latency.toFixed(3) + " seconds." +
-          '<br/>' + ' Payload: <pre>' + JSON.stringify(body,null,'    ') + '</pre>' + "<br/>";
+        '<br/>' + ' Payload: <pre>' + JSON.stringify(body,null,'    ') + '</pre>' + "<br/>";
         // convert the json string into a valid javascript object
         //var _data = JSON.parse(data);
         $('time').html('Last Update:' + new Date());

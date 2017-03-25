@@ -30,8 +30,9 @@ export const echo = (appId, token) => (req, res) => {
   // Only handle message-created Webhook events, and ignore the app's
   // own messages
   // if(req.body.type !== 'message-annotation-added')
-  // if(req.body.type !== 'message-annotation-added')
-    // return;
+  if(req.body.type !== 'message-annotation-added') {
+    console.log(JSON.stringify(req.body,null, "  "));
+  }
 
 	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
 
