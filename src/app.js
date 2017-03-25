@@ -401,7 +401,7 @@ const app = express();
 app.use(express.static(path.dirname(__dirname) + "/public"));
 log("Using path: " + path.dirname(__dirname) + "/public");
 
-app.get("/webhook", function(req, res) {
+app.get("/Activity", function(req, res) {
 	fs.readFile(path.dirname(__dirname) + "/public/webhook.html", 'utf-8', function(err, data) {
     if (err) {
       console.log("Error:" + err);
@@ -426,7 +426,7 @@ export const webapp = (appId, secret, wsecret, cb) => {
     cb(null, app
 
       // Configure Express route for the app Webhook
-      .post('/echo',
+      .post('/OpenWhisk',
 
         // Verify Watson Work request signature and parse request body
         bparser.json({
