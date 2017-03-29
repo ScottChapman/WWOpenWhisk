@@ -47,7 +47,7 @@ export const echo = (appId, token) => (req, res) => {
 
 	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
 
-  ow.actions.invoke({
+  ow.triggers.invoke({
     name: 'WatsonWorkEvent',
     blocking: true,
     result: true,
