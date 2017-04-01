@@ -61,7 +61,7 @@ export const echo = (appId, token) => (req, res) => {
       	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
         req.body.token = token();
         ow.triggers.invoke({
-          name: 'WatsonWorkEvent',
+          name: 'WWAnnotationEvent',
           blocking: true,
           result: true,
           params: req.body}).then(result => console.log(result))
@@ -76,7 +76,7 @@ export const echo = (appId, token) => (req, res) => {
   	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
     req.body.token = token();
     ow.triggers.invoke({
-      name: 'WatsonWorkEvent',
+      name: 'WWMessageEvent',
       blocking: true,
       result: true,
       params: req.body}).then(result => console.log(result))
