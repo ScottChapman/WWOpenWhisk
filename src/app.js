@@ -55,6 +55,7 @@ export const echo = (appId, token) => (req, res) => {
       if(!err) {
         log('Got graphQL Response back! %o', res.body);
         req.body = _.merge(req.body, res.body.data);
+        log('new response %o', req.body);
       	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
       }
       else {
