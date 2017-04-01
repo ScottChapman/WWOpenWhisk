@@ -35,17 +35,37 @@ export const echo = (appId, token) => (req, res) => {
   // be sent asynchronously
   res.status(201).end();
 
-  // Only handle message-created Webhook events, and ignore the app's
-  // own messages
-  // if(req.body.type !== 'message-annotation-added')
-  if(req.body.type !== 'message-annotation-added') {
-    console.log(JSON.stringify(req.body,null, "  "));
+  if (req.body.hasOwnProperty('annotationPayload')) {
+    req.body.annotationPayload = JSON.parse(req.body.annotationPayload);
+    const messageQuery = util.format(`
+  		query {
+  			message(id: "%s") {
+  				content
+  		    id
+  		    createdBy {
+  		      displayName
+  		      id
+  		      emailAddresses
+  		      photoUrl
+  		    }
+  		  }
+  		}`, req.body.messageId);
+    console.log('messageQuery: ' + messageQuery);
+    graphQL(token(), messageQuery, (err,res) => {
+      if(!err) {
+        log('Got graphQL Response back! %o', res.body);
+      	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
+      }
+      else {
+        log("Error with graphQL request... %o", err)
+      }
+    });
+
+  }
+  else {
+  	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
   }
 
-  if (req.body.hasOwnProperty('annotationPayload'))
-    req.body.annotationPayload = JSON.parse(req.body.annotationPayload);
-
-	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
 
   req.body.token = token();
   ow.triggers.invoke({
