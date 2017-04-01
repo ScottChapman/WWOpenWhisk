@@ -55,9 +55,16 @@ export const echo = (appId, token) => (req, res) => {
       if(!err) {
         res.body = JSON.parse(res.body);
         log('Got graphQL Response back! %o', res.body);
+        delete req.body.messageId;
         req.body = _.merge(req.body, res.body.data);
         log('new response %o', req.body);
       	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
+        req.body.token = token();
+        ow.triggers.invoke({
+          name: 'WatsonWorkEvent',
+          blocking: true,
+          result: true,
+          params: req.body}).then(result => console.log(result))
       }
       else {
         log("Error with graphQL request... %o", err)
@@ -67,15 +74,13 @@ export const echo = (appId, token) => (req, res) => {
   }
   else {
   	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
+    req.body.token = token();
+    ow.triggers.invoke({
+      name: 'WatsonWorkEvent',
+      blocking: true,
+      result: true,
+      params: req.body}).then(result => console.log(result))
   }
-
-
-  req.body.token = token();
-  ow.triggers.invoke({
-    name: 'WatsonWorkEvent',
-    blocking: true,
-    result: true,
-    params: req.body}).then(result => console.log(result))
 
   // log('SpaceID: %s', req.body.spaceId);
   // log('SpaceName: %s', req.body.spaceName);
