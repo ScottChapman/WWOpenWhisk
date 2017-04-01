@@ -53,6 +53,7 @@ export const echo = (appId, token) => (req, res) => {
     // console.log('messageQuery: ' + messageQuery);
     graphQL(token(), messageQuery, (err,res) => {
       if(!err) {
+        res.body = JSON.parse(res.body);
         log('Got graphQL Response back! %o', res.body);
         req.body = _.merge(req.body, res.body.data);
         log('new response %o', req.body);
