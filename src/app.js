@@ -50,10 +50,11 @@ export const echo = (appId, token) => (req, res) => {
   		    }
   		  }
   		}`, req.body.messageId);
-    console.log('messageQuery: ' + messageQuery);
+    // console.log('messageQuery: ' + messageQuery);
     graphQL(token(), messageQuery, (err,res) => {
       if(!err) {
         log('Got graphQL Response back! %o', res.body);
+        req.body = _.merge(req.body, res.body.data);
       	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
       }
       else {
