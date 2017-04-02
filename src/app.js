@@ -35,6 +35,8 @@ export const echo = (appId, token) => (req, res) => {
   // be sent asynchronously
   res.status(201).end();
 
+  req.body.token = token();
+
   if (req.body.hasOwnProperty('annotationPayload')) {
     req.body.annotationPayload = JSON.parse(req.body.annotationPayload);
     const messageQuery = util.format(`
@@ -54,12 +56,9 @@ export const echo = (appId, token) => (req, res) => {
     graphQL(token(), messageQuery, (err,res) => {
       if(!err) {
         res.body = JSON.parse(res.body);
-        log('Got graphQL Response back! %o', res.body);
         delete req.body.messageId;
         req.body = _.merge(req.body, res.body.data);
-        log('new response %o', req.body);
       	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
-        req.body.token = token();
         ow.triggers.invoke({
           name: 'WWAnnotationEvent',
           blocking: true,
@@ -74,7 +73,6 @@ export const echo = (appId, token) => (req, res) => {
   }
   else {
   	io.sockets.emit('webhook-event', {eventTime: new Date(), body: req.body});
-    req.body.token = token();
     ow.triggers.invoke({
       name: 'WWMessageEvent',
       blocking: true,
