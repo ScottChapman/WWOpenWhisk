@@ -119,7 +119,7 @@ export const echo = (appId, token) => (req, res) => {
 
 const graphQL = (token, body, callback) => {
   request.post(
-    'https://watsonwork.ibm.com/graphql', {
+    'https://api.watsonwork.ibm.com/graphql', {
       headers: {
         'Content-Type': 'application/graphql',
         'Authorization': 'Bearer ' + token,
